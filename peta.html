@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peta Persebaran Kantor Kelurahan dan Kecamatan Kota Malang </title>
+</head>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+
+<style>
+
+    #map {
+      height: 450px;
+      width: 100%;
+      max-width: 100%;
+      max-height: 100%;
+    }   
+
+    .info {
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      color: #777;
+      background: white;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 5px;
+    }
+    .info h3 {
+      margin: 0 0 5px;
+      color: #000;
+    }
+
+    .legend {
+      line-height: 18px;
+      color: #555;
+    }
+    .legend i {
+        width: 18px;
+        height: 18px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7;
+    }   
+
+    .gradient {
+      background: linear-gradient(90deg, #281cd0 0%, #3edcaa 100%);
+    }
+  </style>
+
+<body>
+    <div class="container">
+        <div class="">
+            <h2><center>Peta Persebaran Kantor Kelurahan dan Kecamatan Kota Malang</center> <hr>
+            <div id="map"></div></h2>
+        </div>
+    </div>
+
+    
+</body>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""></script>
+
+<script>
+
+  var KecIcon = L.icon({
+      iconUrl: 'kelurahan.png',
+
+      iconSize:     [22, 27], // size of the icon
+      iconAnchor:   [22, 24], // point of the icon which will correspond to marker's location
+      popupAnchor:  [-3, -26] // point from which the popup should open relative to the iconAnchor
+  });
+
+  var KelIcon = L.icon({
+      iconUrl: 'kecamatan.png',
+
+      iconSize:     [20, 25], // size of the icon
+      iconAnchor:   [22, 24], // point of the icon which will correspond to marker's location
+      popupAnchor:  [-3, -26] // point from which the popup should open relative to the iconAnchor
+  });
+
+  var popup = L.popup();
+  
+  var Arjosari = L.marker([-7.927916264754277, 112.65333022623564], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Arjosari </b> <br> Jumlah Penduduk : 10.478 <br> <a href='https://maps.app.goo.gl/3tRmRGkYi94Vsfea6' target='_blank'>Buka di Google Maps</a> "),
+      Balearjosari  = L.marker([-7.923779391108621, 112.65134217219851], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Balearjosari </b> <br> Jumlah Penduduk : 9.243 <br> <a href='https://maps.app.goo.gl/PnfcqNPcjS9F9niy9' target='_blank'>Buka di Google Maps</a> "),
+      Blimbing    = L.marker([-7.944287280642025, 112.64682908494768], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Blimbing </b> <br> Jumlah Penduduk : 8.466 <br> <a href='https://maps.app.goo.gl/L6HGiyeVU2cTYbBY6' target='_blank'>Buka di Google Maps</a> "),
+      Bunulrejo = L.marker([-7.969092764196693, 112.64268687352764], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Bunulrejo </b> <br> Jumlah Penduduk : 26.036 <br> <a href='https://maps.app.goo.gl/RXFTewrHCBUKq5hD6' target='_blank'>Buka di Google Maps</a> "),
+      Jodipan  = L.marker([-7.987505229769829, 112.63929645044112], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Jodipan </b> <br> Jumlah Penduduk : 12.158 <br> <a href='https://maps.app.goo.gl/qpHtiq6Pmd1eBEfJ9' target='_blank'>Buka di Google Maps</a> "),
+      Kesatrian    = L.marker([-7.977202476804132, 112.6388052135238], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Kesatrian </b> <br> Jumlah Penduduk : 11.340 <br> <a href='https://maps.app.goo.gl/HrNU5LAK2X94xYyY7' target='_blank'>Buka di Google Maps</a> "),
+      Pandanwangi = L.marker([-7.946295305358168, 112.65851405202083], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Pandanwangi </b> <br> Jumlah Penduduk : 34.067 <br> <a href='https://maps.app.goo.gl/3ZTMaAzgD2V2tm1F7' target='_blank'>Buka di Google Maps</a> "),
+      Polehan  = L.marker([-7.923779391108621, 112.65134217219851], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Polehan </b> <br> Jumlah Penduduk : 9.243 <br> <a href='https://maps.app.goo.gl/wdADHmpRiAm4YJxF6' target='_blank'>Buka di Google Maps</a> "),
+      Polowijen    = L.marker([-7.931253069761277, 112.64811489899307], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Polowijen </b> <br> Jumlah Penduduk : 12.415 <br> <a href='https://maps.app.goo.gl/R4sKP5YNUNABacE29' target='_blank'>Buka di Google Maps</a> "),
+      Purwantoro = L.marker([-7.953431944137854, 112.64790302707539], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Purwantoro </b> <br> Jumlah Penduduk : 28.155 <br> <a href='https://maps.app.goo.gl/NGvTF5eNcC19wWhe6' target='_blank'>Buka di Google Maps</a> "),
+      Purwodadi  = L.marker([-7.935742504792853, 112.64549435450058], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Purwodadi </b> <br> Jumlah Penduduk : 19.494 <br> <a href='https://maps.app.goo.gl/fzZGz4LCbhpCDPrn6' target='_blank'>Buka di Google Maps</a> "),
+      
+      Arjowinangun    = L.marker([-8.038398188326962, 112.64210618274585], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Arjowinangun </b> <br> Jumlah Penduduk : 12.326 <br> <a href='https://maps.app.goo.gl/PchqTA2hzb3Dijzm6' target='_blank'>Buka di Google Maps</a> "),
+      Bumiayu = L.marker([-8.013244462196235, 112.63551671370242], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Bumiayu </b> <br> Jumlah Penduduk : 21.531 <br> <a href='https://maps.app.goo.gl/wiKv4VEcZhhRTAFP9' target='_blank'>Buka di Google Maps</a> "),
+      Buring  = L.marker([-8.010015452695999, 112.6450723143983], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Buring </b> <br> Jumlah Penduduk : 16.767 <br> <a href='https://maps.app.goo.gl/fPw34hCjJfxz3rKF6' target='_blank'>Buka di Google Maps</a> "),
+      Cemorokandang    = L.marker([-8.009999137547878, 112.64509062094449], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Cemorokandang </b> <br> Jumlah Penduduk : 15.064 <br> <a href='https://maps.app.goo.gl/7zPTi9GbC41pdQCk6' target='_blank'>Buka di Google Maps</a> "),
+      Kedungkandang = L.marker([-7.991789641516518, 112.64944334243827], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Kedungkandang </b> <br> Jumlah Penduduk : 12.107 <br> <a href='https://maps.app.goo.gl/EGHWAuKge4Ckj7Vw7' target='_blank'>Buka di Google Maps</a> "),
+      Kotalama  = L.marker([-7.994060529062712, 112.6357189463095], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Kotalama </b> <br> Jumlah Penduduk : 30.992 <br> <a href='https://maps.app.goo.gl/vTJsURkAF8SCKcBV9' target='_blank'>Buka di Google Maps</a> "),
+
+      Lesanpuro    = L.marker([-7.983773785405354, 112.65994476277335], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Lesanpuro </b> <br> Jumlah Penduduk : 21.148 <br> <a href='https://maps.app.goo.gl/7Y1694gy9AUMJWec9' target='_blank'>Buka di Google Maps</a> "),
+      Madyopuro    = L.marker([-7.974852437064624, 112.67397260526748], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Madyopuro </b> <br> Jumlah Penduduk : 22.951 <br> <a href='https://maps.app.goo.gl/8GVC8vEwqT4Bt5mu6' target='_blank'>Buka di Google Maps</a> "),
+      Mergosono    = L.marker([-7.9988592226879005, 112.63594082985985], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Mergosono </b> <br> Jumlah Penduduk : 18.514 <br> <a href='https://maps.app.goo.gl/zQCQKomub1FDBxCM8' target='_blank'>Buka di Google Maps</a> "),
+      Sawojajar    = L.marker([-7.9702863564298, 112.65694924910477], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Sawojajar </b> <br> Jumlah Penduduk : 27.453 <br> <a href='https://maps.app.goo.gl/SNr4cT5StMsYP2CBA' target='_blank'>Buka di Google Maps</a> "),
+      Tlogowaru    = L.marker([-8.036878894985637, 112.65438650245052], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Tlogowaru </b> <br> Jumlah Penduduk : 7.335 <br> <a href='https://maps.app.goo.gl/q2YDKie4pSBZd1R8A' target='_blank'>Buka di Google Maps</a> "),
+      Wonokoyo    = L.marker([-7.983773785405354, 112.65994476277335], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Wonokoyo </b> <br> Jumlah Penduduk : 7.969 <br> <a href='https://maps.app.goo.gl/7Y1694gy9AUMJWec9' target='_blank'>Buka di Google Maps</a> "),
+
+      Bareng    = L.marker([-7.978884005143518, 112.62434497463802], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Bareng </b> <br> Jumlah Penduduk : 14.672 <br> <a href='https://maps.app.goo.gl/EcNjvawzR6sb7jyw6' target='_blank'>Buka di Google Maps</a> "),
+      Gadingkasri    = L.marker([-7.971559341771968, 112.6130343346085], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Gadingkasri </b> <br> Jumlah Penduduk : 8.139 <br> <a href='https://maps.app.goo.gl/Nr8xhPwxSXcNKivv9' target='_blank'>Buka di Google Maps</a> "),
+      Kasin    = L.marker([-7.988344723776733, 112.62718427575632], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Kasin </b> <br> Jumlah Penduduk : 12.565 <br> <a href='https://maps.app.goo.gl/ZFZD2zuZAxvmxE2E7' target='_blank'>Buka di Google Maps</a> "),
+      Kauman    = L.marker([-7.983458407001839, 112.62671685851527], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Kauman </b> <br> Jumlah Penduduk : 8.793 <br> <a href='https://maps.app.goo.gl/LJsHgpordqDCaiLf7' target='_blank'>Buka di Google Maps</a> "),
+      Kiduldalem    = L.marker([-7.980711662525061, 112.63207481632283], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Kiduldalem </b> <br> Jumlah Penduduk : 6.098 <br> <a href='https://maps.app.goo.gl/ttKFKqnDexqMgk6x8' target='_blank'>Buka di Google Maps</a> "),
+      Klojen    = L.marker([-7.973319390438895, 112.63559627758383], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Klojen </b> <br> Jumlah Penduduk : 5.806 <br> <a href='https://maps.app.goo.gl/UBAA6MgAgn3MLwfc7' target='_blank'>Buka di Google Maps</a> "),
+      OroOroDowo    = L.marker([-7.966123167664061, 112.62686863499806], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Oro-Oro Dowo </b> <br> Jumlah Penduduk : 10.105 <br> <a href='https://maps.app.goo.gl/grd78ssHZehdPVWv6' target='_blank'>Buka di Google Maps</a> "),
+      Penanggungan    = L.marker([-7.953678914809931, 112.61780024622388], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Penanggungan </b> <br> Jumlah Penduduk : 9.644 <br> <a href='https://maps.app.goo.gl/WRqDv4HnNZcvrsVH6' target='_blank'>Buka di Google Maps</a> "),
+      RampalCelaket    = L.marker([-7.964152924619872, 112.63148152876322], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Rampal Celaket </b> <br> Jumlah Penduduk : 5.737 <br> <a href='https://maps.app.goo.gl/wZzR5EFNNrfDc9Nm7' target='_blank'>Buka di Google Maps</a> "),
+      Samaan    = L.marker([-7.960754459291923, 112.62812360713515], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Samaan </b> <br> Jumlah Penduduk : 10.383 <br> <a href='https://maps.app.goo.gl/qWkb1b6hd9mmrvfH6' target='_blank'>Buka di Google Maps</a> "),
+      Sukoharjo    = L.marker([-7.982294192507295, 112.63586372319637], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Sukoharjo </b> <br> Jumlah Penduduk : 8.770 <br> <a href='https://maps.app.goo.gl/hiGG8V255adf3AQU7' target='_blank'>Buka di Google Maps</a> "),
+      
+      Dinoyo    = L.marker([-7.941266787598589, 112.60964584896519], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Dinoyo </b> <br> Jumlah Penduduk : 11.353 <br> <a href='https://maps.app.goo.gl/YrVj5CBCsBZnETFE7' target='_blank'>Buka di Google Maps</a> "),
+      Jatimulyo    = L.marker([-7.944189730213984, 112.61731216217972], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Jatimulyo </b> <br> Jumlah Penduduk : 19.719 <br> <a href='https://maps.app.goo.gl/QoSiiSynj1SxmU5Y6' target='_blank'>Buka di Google Maps</a> "),
+      Ketawanggede    = L.marker([-7.948202442986541, 112.60865698617815], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Ketawanggede </b> <br> Jumlah Penduduk : 5.105 <br> <a href='https://maps.app.goo.gl/GtsWcVteU8boiE2j7' target='_blank'>Buka di Google Maps</a> "),
+      Lowokwaru    = L.marker([-7.962419551571346, 112.63293532617924], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Lowokwaru </b> <br> Jumlah Penduduk : 18.853 <br> <a href='https://maps.app.goo.gl/2FT7FecSy77YrHeS7' target='_blank'>Buka di Google Maps</a> "),
+      Merjosari    = L.marker([-7.943335562825074, 112.60379467161245], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Merjosari </b> <br> Jumlah Penduduk : 17.554 <br> <a href='https://maps.app.goo.gl/yPnwRKfUHaZDd1g6A' target='_blank'>Buka di Google Maps</a> "),
+      Mojolangu    = L.marker([-7.938077241955717, 112.63074966933046], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Mojolangu </b> <br> Jumlah Penduduk : 22.562 <br> <a href='https://maps.app.goo.gl/14u1fwNciPgGsnvq8' target='_blank'>Buka di Google Maps</a> "),
+      Sumbersari    = L.marker([-7.9575401482406605, 112.60782262815229], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Sumbersari </b> <br> Jumlah Penduduk : 8.127 <br> <a href='https://maps.app.goo.gl/jLMip3B7DjTRRxvf6' target='_blank'>Buka di Google Maps</a> "),
+      Tasikmadu    = L.marker([-7.915322444532023, 112.62467663326159], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Tasikmadu </b> <br> Jumlah Penduduk : 8.179 <br> <a href='https://maps.app.goo.gl/Zb8MQNqWQ8xXLTXT8' target='_blank'>Buka di Google Maps</a> "),
+      Tlogomas    = L.marker([-7.934588871544743, 112.60422290593216], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Tlogomas </b> <br> Jumlah Penduduk : 14.508 <br> <a href='https://maps.app.goo.gl/kieQed9GnVyy2R3Y8' target='_blank'>Buka di Google Maps</a> "),
+      Tulusrejo    = L.marker([-7.948778057726906, 112.63459643976651], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Tulusrejo </b> <br> Jumlah Penduduk : 16.722 <br> <a href='https://maps.app.goo.gl/W3y8jYrtmMh5JtvZA' target='_blank'>Buka di Google Maps</a> "),
+      Tunggulwulung    = L.marker([-7.928855955370466, 112.61397255317479], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Tunggulwulung </b> <br> Jumlah Penduduk : 9.685 <br> <a href='https://maps.app.goo.gl/RWbufGqddmHRJ3Hs6' target='_blank'>Buka di Google Maps</a> "),
+      Tunjungsekar    = L.marker([-7.931734125786054, 112.63813109354096], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Tunjungsekar </b> <br> Jumlah Penduduk : 17.782 <br> <a href='https://maps.app.goo.gl/y3NxW5ZEMNNDLtMdA' target='_blank'>Buka di Google Maps</a> "),
+      
+      Bakalankrajan    = L.marker([-8.007343077393532, 112.6113915083854], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Bakalankrajan </b> <br> Jumlah Penduduk : 10.665 <br> <a href='https://maps.app.goo.gl/VNrvsB5kVqaEHVnW6' target='_blank'>Buka di Google Maps</a> "),
+      Bandulan    = L.marker([-7.983124587403909, 112.6062118643879], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Bandulan </b> <br> Jumlah Penduduk : 17.761 <br> <a href='https://maps.app.goo.gl/YzuqMuPf2ACkJ7xP9' target='_blank'>Buka di Google Maps</a> "),
+      Bandungrejosari    = L.marker([-8.006931321984547, 112.61846716507976], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Bandungrejosari </b> <br> Jumlah Penduduk : 31.942 <br> <a href='https://maps.app.goo.gl/y2J6oGmABh93DDNT6' target='_blank'>Buka di Google Maps</a> "),
+      Ciptomulyo    = L.marker([-7.999786168611792, 112.63008155601074], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Ciptomulyo </b> <br> Jumlah Penduduk : 13.319 <br> <a href='https://maps.app.goo.gl/Q8VPCmjE2Jzp2Thr8' target='_blank'>Buka di Google Maps</a> "),
+      Gadang    = L.marker([-8.006899278248651, 112.62968890075425], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Gadang </b> <br> Jumlah Penduduk : 20.471 <br> <a href='https://maps.app.goo.gl/dky7zJhEV9BzYDd2A' target='_blank'>Buka di Google Maps</a> "),
+      Karangbesuki    = L.marker([-7.961633346903806, 112.6056059571266], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Karangbesuki </b> <br> Jumlah Penduduk : 19.985 <br> <a href='https://maps.app.goo.gl/JBsYrv2iuyMaQXaWA' target='_blank'>Buka di Google Maps</a> "),
+      Kebonsari    = L.marker([-8.019523003798033, 112.61951539083567], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Kebonsari </b> <br> Jumlah Penduduk : 10.791 <br> <a href='https://maps.app.goo.gl/wYN5KbvuNNCtqj7g6' target='_blank'>Buka di Google Maps</a> "),
+      Mulyorejo    = L.marker([-7.987996936565915, 112.59787211747675], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Mulyorejo </b> <br> Jumlah Penduduk : 17.512 <br> <a href='https://maps.app.goo.gl/9fh2jDrJxuxbHjZk7' target='_blank'>Buka di Google Maps</a> "),
+      Pisangcandi    = L.marker([-7.981293123310103, 112.61304318335613], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Pisangcandi </b> <br> Jumlah Penduduk : 14.530 <br> <a href='https://maps.app.goo.gl/F7kDyUsjx8LkdAxFA' target='_blank'>Buka di Google Maps</a> "),
+      Sukun    = L.marker([-7.990669047879152, 112.61850365775577], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Sukun </b> <br> Jumlah Penduduk : 19.192 <br> <a href='https://maps.app.goo.gl/JdwSahj9fKfgef1K8' target='_blank'>Buka di Google Maps</a> "),
+      Tanjungrejo    = L.marker([-7.988094202417847, 112.61254262785454], {icon:KecIcon}).bindPopup("Nama Kelurahan : <b> Kantor Kelurahan Tanjungrejo </b> <br> Jumlah Penduduk : 28.802 <br> <a href='https://maps.app.goo.gl/vQXiJcdTE3NPHebu8' target='_blank'>Buka di Google Maps</a> ");
+      
+  
+  var cities = L.layerGroup([
+    Arjosari, Balearjosari, Blimbing, Bunulrejo, Jodipan, Kesatrian, Pandanwangi, Polowijen, Purwantoro, Purwodadi, Arjowinangun, Bumiayu, Buring, Cemorokandang, Kedungkandang, Kotalama, Lesanpuro, Madyopuro, Mergosono,
+    Sawojajar, Tlogowaru, Bareng, Gadingkasri, Kasin, Kauman, Kiduldalem, Klojen, OroOroDowo, Penanggungan, RampalCelaket, Samaan, Sukoharjo,
+    Dinoyo, Jatimulyo, Ketawanggede, Lowokwaru, Merjosari, Mojolangu, Sumbersari, Tasikmadu, Tlogomas, Tulusrejo, Tunggulwulung, Tunjungsekar, 
+    Bakalankrajan, Bandulan, Bandungrejosari, Ciptomulyo, Gadang, Karangbesuki, Kebonsari, Mulyorejo, Pisangcandi, Sukun, Tanjungrejo
+  
+  ]);
+
+  var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap'
+  });
+
+  var osmHOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'});
+
+  var map = L.map('map', {
+      center: [-7.971313845111394, 112.63158579965192],
+      zoom: 13,
+      layers: [osm, cities]
+  });
+
+  var baseMaps = {
+      "OpenStreetMap": osm,
+      "OpenStreetMap.HOT": osmHOT
+  };
+
+  var overlayMaps = {
+      "Kelurahan": cities
+  };
+
+  var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+  var baseMaps = {
+      "OpenStreetMap": osm,
+      "<span style='color: red'>OpenStreetMap.HOT</span>": osmHOT
+  };
+
+  var Blimbing = L.marker([-7.930359562530824, 112.65195870559688], {icon: KelIcon}).addTo(map).bindPopup("Nama Kecamatan : <b> Kecamatan Blimbing </b> <br> Jumlah Penduduk : 190.799 <br> Kelurahan : Arjosari, Balearjosari, Blimbing, Bunulrejo, Jodipan, Kesatrian, Pandanwangi, Polehan, Polowijen, Purwantoro, Purwodadi"),
+      Kedungkandang = L.marker([-8.011889893899205, 112.64381892561158], {icon: KelIcon}).addTo(map).bindPopup("Nama Kecamatan : <b> Kecamatan Kedungkandang </b> <br> Jumlah Penduduk : 214.157 <br> Kelurahan : Arjowinangun, Bumiayu, Buring, Cemorokandang, Kedungkandang, Kotalama, Lesanpuro, Madyopuro, Mergosono, Sawojajar, Tlogowaru, Wonokoyo"),
+      Blimbing = L.marker([-7.966359211522706, 112.61799653998531], {icon: KelIcon}).addTo(map).bindPopup("Nama Kecamatan : <b> Kecamatan Klojen </b> <br> Jumlah Penduduk : 100.712 <br> Kelurahan : Bareng, Gadingasri, Kasin, Kauman, Kiduldalem, Klojen, Oro-Oro Dowo, Penanggungan, Rampal Celaket, Samaan, Sukoharjo"),
+      Lowokwaru = L.marker([-7.946169067816569, 112.63046086423705], {icon: KelIcon}).addTo(map).bindPopup("Nama Kecamatan : <b> Kecamatan Lowokwaru </b> <br> Jumlah Penduduk : 170.149 <br> Kelurahan : Dinoyo, Jatimulyo, Ketawanggede, Lowokwaru, Merjosari, Mojolangu, Sumbersari, Tasikmadu, Tlogomas, Tulusrejo, Tunggulwulung, Tunjungsekar"),
+      Sukunkec = L.marker([-8.005076206946715, 112.6186246810947], {icon: KelIcon}).addTo(map).bindPopup("Nama Kecamatan : <b> Kecamatan Sukun </b> <br> Jumlah Penduduk : 100.712 <br> Kelurahan : Bakalankrajan, Bandulan, Bandungrejosari, Ciptomulyo, Gadang, Karangbesuki, Kebonsari, Mulyorejo, Pisangcandi, Sukun, Tanjungrejo");
+      
+  var kecamatan = L.layerGroup([Blimbing, Kedungkandang, Lowokwaru, Sukunkec]);
+
+
+  var openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: 'Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)'
+  });
+
+  layerControl.addBaseLayer(openTopoMap, "OpenTopoMap");
+  layerControl.addOverlay(kecamatan, "Kecamatan");
+        
+</script>  
+
+
+</html>
